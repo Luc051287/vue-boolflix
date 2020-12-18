@@ -4,6 +4,11 @@
   padding: 0;
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #FFFFFF;
+}
+
 .container {
   width: 100%;
   height: 100vh;
@@ -45,13 +50,13 @@ h1 {
 }
 
 #search_btn {
+  color: #FFFFFF;
   background-color: transparent;
   border: 2px solid #FFFFFF;
   padding: 10px 30px;
   text-decoration: none;
   border-radius: 20px;
   font-size: 13px;
-  color: #FFFFFF;
   cursor: pointer;
 }
 
@@ -62,8 +67,18 @@ main {
   padding: 30px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-content: flex-start;
   overflow: auto;
+}
+
+#no_poster {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 24px;
+  line-height: 330px;
+  transform: rotateZ(-30deg);
 }
 
 .movies {
@@ -71,24 +86,23 @@ main {
   cursor: pointer;
   margin: 20px 10px;
   /*gestire bene altezza e larghezza in base alle immagini che si scaricano*/
-  width: calc(100%/6 - 20px);
-  height: 375px;
-  min-width: 200px;
+  /* width: calc(100%/6 - 20px); */
+  width: 220px;
+  height: 330px;
+  min-width: 220px;
   /* padding: 20px; */
-  background-color: red;
+  background-color: black;
 }
 
 .movies > img {
   width: 100%;
   /*gestire bene altezza e larghezza in base alle immagini che si scaricano*/
-  height: 375px;
+  height: 330px;
   object-fit: cover;
   object-position: center;
 }
 
 .infos {
-  color: #FFFFFF;
-  font-family: 'Roboto', sans-serif;
   padding: 20px 10px;
   position: absolute;
   top: 0;
@@ -98,6 +112,8 @@ main {
   background-color: rgba(0,0,0,0.8);
   opacity: 0;
   transition: opacity 0.5s;
+  /*in caso togliere*/
+  overflow: auto;
 }
 
 .movies:hover .infos {
@@ -110,4 +126,15 @@ main {
 
 .infos > p > span:first-child {
   font-weight: 700;
+}
+
+#no_result {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+#no_result > p {
+  margin: auto;
+  font-size: 50px;
 }

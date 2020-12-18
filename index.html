@@ -16,20 +16,28 @@
         <header>
           <h1>Boolflix</h1>
           <div id="search_field">
-            <input id="search_text" type="text" name="" value="" placeholder="Search ">
-            <button id="search_btn" type="button" name="button">SEARCH</button>
+            <input id="search_text" type="text" placeholder="Search Movie" v-model="search" @keyup.enter="searchMovie()">
+            <button id="search_btn" type="button" name="button" @click="searchMovie()">SEARCH</button>
           </div>
         </header>
         <main>
-          <div class="movies">
-            <img src="img/prova.jpg" alt="">
+          <div v-if="resultsArr.length == 0 && init == true"></div>
+          <div v-else-if="resultsArr.length == 0 && init == false" id="no_result">
+            <p>NO RESULT</p>
+          </div>
+          <div v-else v-for="result in resultsArr" class="movies">
+            <img v-if="result.poster_path != null" :src="link+result.poster_path" alt="">
+            <p v-else id="no_poster">NO POSTER FOUND</p>
             <div class="infos">
-              <p> <span>Titolo:</span> <span class="title">Lorem</span> </p>
-              <p> <span>Titolo Originale:</span> <span class="title_original">Lorem</span> </p>
-              <p> <span>Voto:</span> <span class="score">Lorem</span> </p>
-              <p> <span>Overview:</span> <span cllass="overview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span> </p>
+              <p> <span>Titolo:</span> <span class="title">{{result.title}}</span> </p>
+              <p> <span>Titolo Originale:</span> <span class="title_original">{{result.original_title}}</span> </p>
+              <p> <span>Voto:</span>
+                <span class="score" :class="">Lorem</span>
+              </p>
+              <p> <span>Overview:</span> <span class="overview">{{result.overview}}</span> </p>
             </div>
           </div>
+          <!-- <div v-else></div> -->
         </main>
       </div>
     </div>
