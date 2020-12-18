@@ -19,10 +19,10 @@ var app = new Vue(
             query: this.search.trim().toLowerCase()
           }
         }).then((response) => {
-          this.init = false;
-          console.log(response.data.results);
           this.resultsArr = response.data.results;
-          console.log(this.resultsArr);
+          if (this.init == true) {
+            this.init = false;
+          }
         })
       }
     },
