@@ -10,6 +10,7 @@ var app = new Vue(
     },
     methods: {
       searchMovie: function() {
+        this.resultsArr = [];
         axios.get('https://api.themoviedb.org/3/search/movie?',{
           params: {
             api_key: '71648f6532d78651db76cf10430d87ef',

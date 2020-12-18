@@ -88,10 +88,11 @@ main {
   /*gestire bene altezza e larghezza in base alle immagini che si scaricano*/
   /* width: calc(100%/6 - 20px); */
   width: 220px;
-  height: 330px;
+  height: 334px;
   min-width: 220px;
   /* padding: 20px; */
   background-color: black;
+  border: 2px solid #FFFFFF;
 }
 
 .movies > img {
