@@ -27,10 +27,17 @@ var app = new Vue(
           } else {
             this.result = false;
           }
+          this.search = '';
           // if (this.init == true) {
           //   this.init = false;
           // }
         })
+      },
+      scrollUp: function(index) {
+        let info = document.getElementsByClassName("infos");
+        setTimeout(function() {
+          info[index].scrollTop = 0;
+        },300);
       }
     },
     computed: {

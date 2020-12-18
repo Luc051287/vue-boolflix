@@ -26,7 +26,7 @@
           <div v-else-if="resultsArr.length == 0 && result == true" id="no_result">
             <p>NO RESULT</p>
           </div>
-          <div v-else-if="resultsArr.length != 0" v-for="result in resultsArr" class="movies">
+          <div v-else-if="resultsArr.length != 0" v-for="(result, index) in resultsArr" class="movies" @mouseleave="scrollUp(index)">
             <img v-if="result.poster_path != null" :src="link+result.poster_path" alt="">
             <p v-else id="no_poster">NO POSTER FOUND</p>
             <div class="infos">
@@ -44,7 +44,6 @@
               <p> <span>Overview:</span> <span class="overview">{{result.overview}}</span> </p>
             </div>
           </div>
-          <!-- <div v-else></div> -->
         </main>
       </div>
     </div>
