@@ -4,7 +4,8 @@ var app = new Vue(
     data: {
       search: '',
       resultsArr: [],
-      init: true,
+      // init: true,
+      result: false,
       title: '',
       link: 'https://image.tmdb.org/t/p/w220_and_h330_face'
     },
@@ -21,9 +22,14 @@ var app = new Vue(
           }
         }).then((response) => {
           this.resultsArr = response.data.results;
-          if (this.init == true) {
-            this.init = false;
+          if (this.resultsArr.length == 0) {
+            this.result = true;
+          } else {
+            this.result = false;
           }
+          // if (this.init == true) {
+          //   this.init = false;
+          // }
         })
       }
     },

@@ -22,11 +22,11 @@
           </div>
         </header>
         <main>
-          <div v-if="resultsArr.length == 0 && init == true"></div>
-          <div v-else-if="resultsArr.length == 0 && init == false" id="no_result">
+          <div v-if="resultsArr.length == 0 && result == false"></div>
+          <div v-else-if="resultsArr.length == 0 && result == true" id="no_result">
             <p>NO RESULT</p>
           </div>
-          <div v-else v-for="result in resultsArr" class="movies">
+          <div v-else-if="resultsArr.length != 0" v-for="result in resultsArr" class="movies">
             <img v-if="result.poster_path != null" :src="link+result.poster_path" alt="">
             <p v-else id="no_poster">NO POSTER FOUND</p>
             <div class="infos">
@@ -37,7 +37,7 @@
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
                   <i class="far fa-star"></i>
                 </span>
               </p>
