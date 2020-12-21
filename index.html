@@ -25,7 +25,7 @@
           <div v-if="result == true && resultsArr.length == 0" id="no_result">
             <p>NO RESULT</p>
           </div>
-          <div v-for="(result, index) in resultsArr" class="movies" @mouseleave="scrollUp(index)">
+          <div v-for="(result, index) in resultsArr" class="movies" @mouseleave="scrollUp(index)" @mouseenter="findCast(result)">
             <img v-if="result.poster_path != null" :src="link+result.poster_path" alt="">
             <p v-else id="no_poster">NO POSTER FOUND</p>
             <div class="infos">
@@ -53,6 +53,11 @@
               <p> <span>Cast:</span>
                 <span>
                   <span>{{cast.join(", ")}}</span>
+                </span>
+              </p>
+              <p> <span>Generi:</span>
+                <span>
+                  <span>{{findGenres(result.genre_ids).join(", ")}}</span>
                 </span>
               </p>
               <p> <span>Overview:</span> <span class="overview">{{result.overview}}</span> </p>
