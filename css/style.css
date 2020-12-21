@@ -126,13 +126,13 @@ main {
   opacity: 1;
 }
 
-.infos > p > span:last-child {
-  font-weight: 200;
-}
-
 .infos > p > span:first-child {
   font-weight: 700;
   vertical-align: middle;
+}
+
+.infos > p > span:last-child {
+  font-weight: 200;
 }
 
 .infos > p {

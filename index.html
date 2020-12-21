@@ -23,7 +23,7 @@
         </header>
         <main>
           <div v-if="resultsArr.length == 0 && result == false"></div>
-          <div v-else-if="resultsArr.length == 0 && result == true" id="no_result">
+          <div v-else-if="result == true && resultsArr.length == 0" id="no_result">
             <p>NO RESULT</p>
           </div>
           <div v-else-if="resultsArr.length != 0" v-for="(result, index) in resultsArr" class="movies" @mouseleave="scrollUp(index)" @mouseenter="findCast(result)">
@@ -52,8 +52,8 @@
                 </span>
               </p>
               <p> <span>Cast:</span>
-                <span v-for="names in cast">
-                  {{names}}
+                <span>
+                  <span>{{cast.join(", ")}}</span>
                 </span>
               </p>
               <p> <span>Overview:</span> <span class="overview">{{result.overview}}</span> </p>

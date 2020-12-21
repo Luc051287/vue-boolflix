@@ -58,7 +58,9 @@ var app = new Vue(
           }
         }).then((response) => {
           for (names of response.data.cast) {
-            this.cast.push(names.name)
+            if (this.cast.length < 5) {
+              this.cast.push(names.name);
+            }
           }
         })
       },
@@ -86,4 +88,3 @@ var app = new Vue(
     }
   }
 );
-console.log(3/2)
