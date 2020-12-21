@@ -29,17 +29,24 @@ var app = new Vue(
             include_adult: 'false',
             query: this.search.trim().toLowerCase()
           }
-        }).then((response) => {
-          this.resultsArr = response.data.results;
-          if (this.resultsArr.length == 0) {
-            this.result = true;
-          } else {
-            this.result = false;
-          }
-          this.search = '';
-          // if (this.init == true) {
-          //   this.init = false;
-          // }
+        }).then((responseMovie) => {
+          axios.get('https://api.themoviedb.org/3/search/tv?',{
+            params: {
+              api_key: '71648f6532d78651db76cf10430d87ef',
+              language: 'it-IT',
+              page: '1',
+              include_adult: 'false',
+              query: this.search.trim().toLowerCase()
+            }
+          }).then((responseTv) => {
+            this.resultsArr = responseMovie.data.results.concat(responseTv.data.results);
+            if (this.resultsArr.length == 0) {
+              this.result = true;
+            } else {
+              this.result = false;
+            }
+            this.search = '';
+          })
         })
       },
       scrollUp: function(index) {
