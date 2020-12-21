@@ -132,6 +132,7 @@ main {
 
 .infos > p > span:first-child {
   font-weight: 700;
+  vertical-align: middle;
 }
 
 .infos > p {

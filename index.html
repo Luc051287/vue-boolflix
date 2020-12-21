@@ -33,8 +33,8 @@
               <p> <span>Titolo:</span> <span class="title">{{result.title}}</span> </p>
               <p> <span>Titolo Originale:</span> <span class="title_original">{{result.original_title}}</span> </p>
               <p> <span>Lingua Originale:</span> <span class="language_original">
-                <img :src="flags[result.original_language]" alt="">
-                <!-- {{result.original_language}} -->
+                <img v-if="typeof flags[result.original_language] !== 'undefined'" :src="flags[result.original_language]" alt="">
+                <span v-else>{{result.original_language}}</span>
               </span> </p>
               <p> <span>Voto:</span>
                 <span class="score" >

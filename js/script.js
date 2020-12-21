@@ -14,7 +14,8 @@ var app = new Vue(
         it: 'img/it.png',
         fr: 'img/fr.png',
         de: 'img/de.png',
-        ja: 'img/ja.png'
+        ja: 'img/ja.png',
+        es: 'img/es.png'
       }
     },
     methods: {
