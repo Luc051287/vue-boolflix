@@ -21,34 +21,29 @@ var app = new Vue(
     methods: {
       searchMovie: function() {
         this.resultsArr = [];
-        axios.get('https://api.themoviedb.org/3/search/movie?',{
+        let promiseMovie = axios.get('https://api.themoviedb.org/3/search/movie?',{
           params: {
             api_key: '71648f6532d78651db76cf10430d87ef',
-            // language: 'it-IT',
             page: '1',
-            // include_adult: 'false',
             query: this.search.trim().toLowerCase()
           }
-        }).then((responseMovie) => {
-          axios.get('https://api.themoviedb.org/3/search/tv?',{
-            params: {
-              api_key: '71648f6532d78651db76cf10430d87ef',
-              // language: 'it-IT',
-              page: '1',
-              // include_adult: 'false',
-              query: this.search.trim().toLowerCase()
-            }
-          }).then((responseTv) => {
-            this.resultsArr = responseMovie.data.results.concat(responseTv.data.results);
-            if (this.resultsArr.length == 0) {
-              this.result = true;
-            } else {
-              this.result = false;
-            }
-            this.search = '';
-          })
-        })
-
+        });
+        let promiseTV = axios.get('https://api.themoviedb.org/3/search/tv?',{
+          params: {
+            api_key: '71648f6532d78651db76cf10430d87ef',
+            page: '1',
+            query: this.search.trim().toLowerCase()
+          }
+        });
+        Promise.all([promiseMovie, promiseTV]).then((values) => {
+          this.resultsArr = values[0].data.results.concat(values[1].data.results).sort((a,b) => b.popularity - a.popularity);
+          if (this.resultsArr.length == 0) {
+            this.result = true;
+          } else {
+            this.result = false;
+          }
+          this.search = '';
+        });
       },
       findCast: function(result) {
         this.cast = [];
