@@ -30,8 +30,18 @@
             <img v-if="result.poster_path != null" :src="link+result.poster_path" alt="">
             <p v-else id="no_poster">NO POSTER FOUND</p>
             <div class="infos">
-              <p> <span>Titolo:</span> <span class="title">{{result.title}}</span> </p>
-              <p> <span>Titolo Originale:</span> <span class="title_original">{{result.original_title}}</span> </p>
+              <p> <span>Titolo:</span>
+                <span v-if="typeof result.title !== 'undefined'" class="title">{{result.title}}
+                </span>
+                <span v-else class="title">{{result.name}}
+                </span>
+              </p>
+              <p> <span>Titolo Originale:</span>
+                <span v-if="typeof result.original_title !== 'undefined'" class="title_original">{{result.original_title}}
+                </span>
+                <span v-else class="title">{{result.original_name}}
+                </span>
+              </p>
               <p> <span>Lingua Originale:</span> <span class="language_original">
                 <img v-if="typeof flags[result.original_language] !== 'undefined'" :src="flags[result.original_language]" alt="">
                 <span v-else>{{result.original_language}}</span>

@@ -24,7 +24,7 @@ var app = new Vue(
         axios.get('https://api.themoviedb.org/3/search/movie?',{
           params: {
             api_key: '71648f6532d78651db76cf10430d87ef',
-            language: 'it-IT',
+            // language: 'it-IT',
             page: '1',
             include_adult: 'false',
             query: this.search.trim().toLowerCase()
@@ -33,7 +33,7 @@ var app = new Vue(
           axios.get('https://api.themoviedb.org/3/search/tv?',{
             params: {
               api_key: '71648f6532d78651db76cf10430d87ef',
-              language: 'it-IT',
+              // language: 'it-IT',
               page: '1',
               include_adult: 'false',
               query: this.search.trim().toLowerCase()
