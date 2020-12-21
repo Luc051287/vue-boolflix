@@ -8,7 +8,14 @@ var app = new Vue(
       // init: true,
       result: false,
       title: '',
-      link: 'https://image.tmdb.org/t/p/w220_and_h330_face'
+      link: 'https://image.tmdb.org/t/p/w220_and_h330_face',
+      flags: {
+        en: 'img/en.png',
+        it: 'img/it.png',
+        fr: 'img/fr.png',
+        de: 'img/de.png',
+        ja: 'img/ja.png'
+      }
     },
     methods: {
       searchMovie: function() {
@@ -38,14 +45,16 @@ var app = new Vue(
         let info = document.getElementsByClassName("infos");
         setTimeout(function() {
           info[index].scrollTop = 0;
-        },300);
+        }, 300);
       },
       stars: function(result) {
         let stars = ["far fa-star","far fa-star","far fa-star","far fa-star","far fa-star"];
-        let average = (Math.ceil(result.vote_average)/2);
+        let average = (Math.round(result.vote_average)/2);
         stars.forEach((value, index) => {
-          if (index < average) {
-            prova[index] = 'fas fa-star';
+          if (index < average && (average - index) == 0.5) {
+            stars[index] = 'fas fa-star-half-alt';
+          } else if (index < average) {
+            stars[index] = 'fas fa-star'
           }
         });
         return stars;

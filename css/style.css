@@ -116,6 +116,12 @@ main {
   overflow: auto;
 }
 
+.language_original > img {
+  width: 20px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
 .movies:hover .infos {
   opacity: 1;
 }
