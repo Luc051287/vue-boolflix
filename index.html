@@ -33,12 +33,12 @@
               <p> <span>Titolo:</span> <span class="title">{{result.title}}</span> </p>
               <p> <span>Titolo Originale:</span> <span class="title_original">{{result.original_title}}</span> </p>
               <p> <span>Voto:</span>
-                <span class="score" :class="">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
+                <span class="score" >
+                  <i v-for="star in stars(result)" :class="star"></i>
+                  <!-- <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star-half-alt"></i>
-                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i> -->
                 </span>
               </p>
               <p> <span>Overview:</span> <span class="overview">{{result.overview}}</span> </p>

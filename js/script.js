@@ -3,6 +3,7 @@ var app = new Vue(
     el: "#root",
     data: {
       search: '',
+      voteClass: '',
       resultsArr: [],
       // init: true,
       result: false,
@@ -38,6 +39,16 @@ var app = new Vue(
         setTimeout(function() {
           info[index].scrollTop = 0;
         },300);
+      },
+      stars: function(result) {
+        let stars = ["far fa-star","far fa-star","far fa-star","far fa-star","far fa-star"];
+        let average = (Math.ceil(result.vote_average)/2);
+        stars.forEach((value, index) => {
+          if (index < average) {
+            prova[index] = 'fas fa-star';
+          }
+        });
+        return stars;
       }
     },
     computed: {
@@ -45,3 +56,4 @@ var app = new Vue(
     }
   }
 );
+console.log(3/2)
