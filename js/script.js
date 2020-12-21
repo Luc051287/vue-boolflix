@@ -5,8 +5,8 @@ var app = new Vue(
       search: '',
       voteClass: '',
       resultsArr: [],
-      // init: true,
       result: false,
+      cast: [],
       title: '',
       link: 'https://image.tmdb.org/t/p/w220_and_h330_face',
       flags: {
@@ -26,7 +26,7 @@ var app = new Vue(
             api_key: '71648f6532d78651db76cf10430d87ef',
             // language: 'it-IT',
             page: '1',
-            include_adult: 'false',
+            // include_adult: 'false',
             query: this.search.trim().toLowerCase()
           }
         }).then((responseMovie) => {
@@ -35,7 +35,7 @@ var app = new Vue(
               api_key: '71648f6532d78651db76cf10430d87ef',
               // language: 'it-IT',
               page: '1',
-              include_adult: 'false',
+              // include_adult: 'false',
               query: this.search.trim().toLowerCase()
             }
           }).then((responseTv) => {
@@ -47,6 +47,19 @@ var app = new Vue(
             }
             this.search = '';
           })
+        })
+
+      },
+      findCast: function(result) {
+        this.cast = [];
+        axios.get(`https://api.themoviedb.org/3/${typeof result.title !== 'undefined' ? 'movie' : 'tv'}/${result.id}/credits?`,{
+          params: {
+            api_key: '71648f6532d78651db76cf10430d87ef',
+          }
+        }).then((response) => {
+          for (names of response.data.cast) {
+            this.cast.push(names.name)
+          }
         })
       },
       scrollUp: function(index) {
