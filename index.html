@@ -22,11 +22,10 @@
           </div>
         </header>
         <main>
-          <div v-if="resultsArr.length == 0 && result == false"></div>
-          <div v-else-if="result == true && resultsArr.length == 0" id="no_result">
+          <div v-if="result == true && resultsArr.length == 0" id="no_result">
             <p>NO RESULT</p>
           </div>
-          <div v-else-if="resultsArr.length != 0" v-for="(result, index) in resultsArr" class="movies" @mouseleave="scrollUp(index)" @mouseenter="findCast(result)">
+          <div v-for="(result, index) in resultsArr" class="movies" @mouseleave="scrollUp(index)" @mouseenter="findCast(result)">
             <img v-if="result.poster_path != null" :src="link+result.poster_path" alt="">
             <p v-else id="no_poster">NO POSTER FOUND</p>
             <div class="infos">
