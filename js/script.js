@@ -2,12 +2,11 @@ var app = new Vue(
   {
     el: "#root",
     data: {
+      result: false,
       search: '',
       voteClass: '',
       genres: [],
       resultsArr: [],
-      result: false,
-      cast: [],
       title: '',
       link: 'https://image.tmdb.org/t/p/w220_and_h330_face',
       flags: {
@@ -22,6 +21,7 @@ var app = new Vue(
     methods: {
       searchMovie: function() {
         this.resultsArr = [];
+        // In caso mettere unica chiamata multisearch
         let promiseMovie = axios.get('https://api.themoviedb.org/3/search/movie?',{
           params: {
             api_key: '71648f6532d78651db76cf10430d87ef',
@@ -39,27 +39,34 @@ var app = new Vue(
           }
         });
         Promise.all([promiseMovie, promiseTV]).then((values) => {
-          this.resultsArr = values[0].data.results.concat(values[1].data.results).sort((a,b) => b.popularity - a.popularity);
+          let newArr = values[0].data.results.concat(values[1].data.results);
           if (this.resultsArr.length == 0) {
             this.result = true;
           } else {
             this.result = false;
           }
           this.search = '';
+          for (let i=0; i < newArr.length;i++) {
+            axios.get(`https://api.themoviedb.org/3/${typeof newArr[i].title !== 'undefined' ? 'movie' : 'tv'}/${newArr[i].id}/credits?`,{
+              params: {
+                api_key: '71648f6532d78651db76cf10430d87ef',
+              }
+            }).then(response => {
+              this.findCast(newArr[i]);
+            })
+          }
+          this.resultsArr = newArr.sort((a,b) => b.popularity - a.popularity);          
         });
       },
       findCast: function(result) {
-        this.cast = [];
         axios.get(`https://api.themoviedb.org/3/${typeof result.title !== 'undefined' ? 'movie' : 'tv'}/${result.id}/credits?`,{
           params: {
             api_key: '71648f6532d78651db76cf10430d87ef',
           }
-        }).then((response) => {
+        }).then(response => {
+          result.cast = [];
           for (names of response.data.cast) {
-            // manca gestire l'undefined
-            if (this.cast.length < 5) {
-              this.cast.push(names.name);
-            }
+            result.cast.push(names.name)
           }
         })
       },
