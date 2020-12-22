@@ -6,7 +6,7 @@ var app = new Vue(
       search: '',
       voteClass: '',
       genres: [],
-      prova: false,
+      genre: 'all',
       resultsArr: [],
       title: '',
       link: 'https://image.tmdb.org/t/p/w220_and_h330_face',
@@ -23,7 +23,6 @@ var app = new Vue(
       searchMovie: function() {
         this.result = false;
         this.resultsArr = [];
-        // In caso mettere unica chiamata multisearch
         let promiseMovie = axios.get('https://api.themoviedb.org/3/search/movie?',{
           params: {
             api_key: '71648f6532d78651db76cf10430d87ef',
@@ -52,6 +51,7 @@ var app = new Vue(
           this.search = '';
         });
       },
+
       findCast: function(result) {
         axios.get(`https://api.themoviedb.org/3/${typeof result.title !== 'undefined' ? 'movie' : 'tv'}/${result.id}/credits?`,{
           params: {
@@ -65,12 +65,14 @@ var app = new Vue(
           this.$forceUpdate();
         })
       },
+
       scrollUp: function(index) {
         let info = document.getElementsByClassName("infos");
         setTimeout(function() {
           info[index].scrollTop = 0;
         }, 300);
       },
+
       stars: function(result) {
         let stars = ["far fa-star","far fa-star","far fa-star","far fa-star","far fa-star"];
         let average = (Math.round(result.vote_average)/2);
@@ -83,6 +85,7 @@ var app = new Vue(
         });
         return stars;
       },
+
       findGenres: function(arrayID) {
         return arrayID.map((e1,index) => {
           let str = '';
@@ -96,20 +99,33 @@ var app = new Vue(
         })
       }
     },
+    computed: {
+      genresInPage: function() {
+        let genresArr = [];
+        this.resultsArr.forEach((e1) => {
+          this.findGenres(e1.genre_ids).forEach( e2 => {
+            if (!genresArr.includes(e2)) {
+              genresArr.push(e2);
+            }
+          })
+        });
+        return genresArr
+      }
+    },
     mounted: function()  {
-        let promiseMovie = axios.get('https://api.themoviedb.org/3/genre/movie/list?',{
-          params: {
-            api_key: '71648f6532d78651db76cf10430d87ef',
-          }
-        });
-        let promiseTV = axios.get('https://api.themoviedb.org/3/genre/tv/list?',{
-          params: {
-            api_key: '71648f6532d78651db76cf10430d87ef',
-          }
-        });
-        Promise.all([promiseMovie, promiseTV]).then((values) => {
-          this.genres = values[0].data.genres.concat(values[1].data.genres)
-        });
+      let promiseMovie = axios.get('https://api.themoviedb.org/3/genre/movie/list?',{
+        params: {
+          api_key: '71648f6532d78651db76cf10430d87ef',
+        }
+      });
+      let promiseTV = axios.get('https://api.themoviedb.org/3/genre/tv/list?',{
+        params: {
+          api_key: '71648f6532d78651db76cf10430d87ef',
+        }
+      });
+      Promise.all([promiseMovie, promiseTV]).then((values) => {
+        this.genres = values[0].data.genres.concat(values[1].data.genres)
+      });
     }
   }
 );

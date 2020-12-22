@@ -59,6 +59,14 @@ h1 {
   cursor: pointer;
 }
 
+#genre {
+  width: 140px;
+}
+
+#select > label {
+  margin-right: 10px;
+}
+
 main {
   width: 100%;
   height: calc(100vh - 80px);

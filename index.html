@@ -16,6 +16,13 @@
       <div class="container">
         <header>
           <h1>Boolflix</h1>
+          <div id="select">
+            <label for="genre">Filtra per genere</label>
+            <select id="genre" name="genre" v-model="genre">
+              <option value="all">Tutti</option>
+              <option v-for="genre in genresInPage" :value="genre">{{genre}}</option>
+            </select>
+          </div>
           <div id="search_field">
             <input id="search_text" type="text" placeholder="Search Movie" v-model="search" @keyup.enter="searchMovie()">
             <button id="search_btn" type="button" name="button" @click="searchMovie()">SEARCH</button>
