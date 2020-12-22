@@ -21,6 +21,7 @@ var app = new Vue(
     },
     methods: {
       searchMovie: function() {
+        this.result = false;
         this.resultsArr = [];
         // In caso mettere unica chiamata multisearch
         let promiseMovie = axios.get('https://api.themoviedb.org/3/search/movie?',{
@@ -43,14 +44,12 @@ var app = new Vue(
           let newArr = values[0].data.results.concat(values[1].data.results);
           if (this.resultsArr.length == 0) {
             this.result = true;
-          } else {
-            this.result = false;
           }
-          // this.search = '';
           for (let i=0; i < newArr.length;i++) {
             this.findCast(newArr[i]);
           }
           this.resultsArr = newArr.sort((a,b) => b.popularity - a.popularity);
+          this.search = '';
         });
       },
       findCast: function(result) {
