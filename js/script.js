@@ -110,6 +110,13 @@ var app = new Vue(
           })
         });
         return genresArr
+      },
+      filterResults: function() {
+        if (this.genre == 'all') {
+          return this.resultsArr
+        } else {
+          return this.resultsArr.filter(elem => this.findGenres(elem.genre_ids).includes(this.genre));
+        }
       }
     },
     mounted: function()  {

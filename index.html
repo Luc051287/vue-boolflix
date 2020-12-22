@@ -32,7 +32,7 @@
           <div v-if="result == true && resultsArr.length == 0" id="no_result">
             <p>NO RESULT</p>
           </div>
-          <div v-else v-for="(result, index) in resultsArr" class="movies" @mouseleave="scrollUp(index)">
+          <div v-else v-for="(result, index) in filterResults" class="movies" @mouseleave="scrollUp(index)">
             <img v-if="result.poster_path != null" :src="link+result.poster_path" alt="">
             <p v-else id="no_poster">NO POSTER FOUND</p>
             <div class="infos">
