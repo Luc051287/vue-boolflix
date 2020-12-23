@@ -67,14 +67,14 @@ h1 {
   margin-right: 10px;
 }
 
-main {
+#main_view {
   width: 100%;
   height: calc(100vh - 80px);
   background-color: black;
   padding: 30px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /* justify-content: center; */
   align-content: flex-start;
   overflow: auto;
 }
@@ -92,19 +92,15 @@ main {
   position: relative;
   cursor: pointer;
   margin: 20px 10px;
-  /*gestire bene altezza e larghezza in base alle immagini che si scaricano*/
-  /* width: calc(100%/6 - 20px); */
   width: 220px;
   height: 334px;
   min-width: 220px;
-  /* padding: 20px; */
   background-color: black;
   border: 2px solid #FFFFFF;
 }
 
 .movies > img {
   width: 100%;
-  /*gestire bene altezza e larghezza in base alle immagini che si scaricano*/
   height: 330px;
   object-fit: cover;
   object-position: center;
@@ -120,7 +116,6 @@ main {
   background-color: rgba(0,0,0,0.8);
   opacity: 0;
   transition: opacity 0.5s;
-  /*in caso togliere e allargare l'immagine*/
   overflow: auto;
 }
 
