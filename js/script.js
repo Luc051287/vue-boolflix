@@ -4,8 +4,13 @@ var app = new Vue(
     data: {
       result: false,
       search: '',
+      isSearch: false,
       voteClass: '',
       genres: [],
+      pageMovieCall: 1,
+      pageTvCall: 1,
+      movieTotPages: 0,
+      tvTotPages: 0,
       genre: 'all',
       resultsArr: [],
       title: '',
@@ -21,13 +26,17 @@ var app = new Vue(
     },
     methods: {
       searchMovie: function() {
+        if (this.isSearch == true) {
+          this.resultsArr = [];
+          this.genre = 'all';
+          this.isSearch = false;
+        }
         this.result = false;
-        this.resultsArr = [];
         let promiseMovie = axios.get('https://api.themoviedb.org/3/search/movie?',{
           params: {
             api_key: '71648f6532d78651db76cf10430d87ef',
             // language: "it_IT",
-            page: '1',
+            page: this.pageMovieCall,
             query: this.search.trim().toLowerCase()
           }
         });
@@ -35,11 +44,13 @@ var app = new Vue(
           params: {
             api_key: '71648f6532d78651db76cf10430d87ef',
             // language: "it_IT",
-            page: '1',
+            page: this.pageTvCall,
             query: this.search.trim().toLowerCase()
           }
         });
         Promise.all([promiseMovie, promiseTV]).then((values) => {
+          this.movieTotPages = values[0].data.total_pages;
+          this.tvTotPages = values[1].data.total_pages;
           let newArr = values[0].data.results.concat(values[1].data.results);
           if (this.resultsArr.length == 0) {
             this.result = true;
@@ -47,8 +58,9 @@ var app = new Vue(
           for (let i=0; i < newArr.length;i++) {
             this.findCast(newArr[i]);
           }
-          this.resultsArr = newArr.sort((a,b) => b.popularity - a.popularity);
-          this.search = '';
+          this.resultsArr.push(...newArr);
+            // .sort((a,b) => b.popularity - a.popularity));
+          // this.search = '';
         });
       },
 
@@ -97,6 +109,17 @@ var app = new Vue(
           })
           return str
         })
+      },
+      scroll: function() {
+        let myDiv = document.getElementById("main_view");
+        let bottom = myDiv.scrollTop + myDiv.offsetHeight === myDiv.scrollHeight;
+        if (bottom) {
+          if (this.pageMovieCall <= this.movieTotPages || this.pageTvCall <= this.tvTotPages) {
+            this.pageMovieCall += 1;
+            this.pageTvCall += 1;
+            this.searchMovie();
+          }
+        }
       }
     },
     computed: {

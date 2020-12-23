@@ -24,11 +24,11 @@
             </select>
           </div>
           <div id="search_field">
-            <input id="search_text" type="text" placeholder="Search Movie" v-model="search" @keyup.enter="searchMovie()">
-            <button id="search_btn" type="button" name="button" @click="searchMovie()">SEARCH</button>
+            <input id="search_text" type="text" placeholder="Search Movie" v-model="search" @keyup.enter="isSearch = true; pageMovieCall = 1; pageTvCall = 1; searchMovie()">
+            <button id="search_btn" type="button" name="button" @click="isSearch = true; pageMovieCall = 1; pageTvCall = 1; searchMovie()">SEARCH</button>
           </div>
         </header>
-        <main>
+        <main id="main_view" @scroll="scroll()">
           <div v-if="result == true && resultsArr.length == 0" id="no_result">
             <p>NO RESULT</p>
           </div>
