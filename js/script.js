@@ -113,7 +113,7 @@ var app = new Vue(
       scroll: function() {
         let myDiv = document.getElementById("main_view");
         let bottom = myDiv.scrollTop + myDiv.offsetHeight === myDiv.scrollHeight;
-        if (bottom) {
+        if (bottom == true) {
           if (this.pageMovieCall <= this.movieTotPages || this.pageTvCall <= this.tvTotPages) {
             this.pageMovieCall += 1;
             this.pageTvCall += 1;
