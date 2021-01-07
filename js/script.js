@@ -6,6 +6,7 @@ var app = new Vue(
       search: '',
       isSearch: false,
       voteClass: '',
+      title: '',
       genres: [],
       pageMovieCall: 1,
       pageTvCall: 1,
@@ -26,18 +27,24 @@ var app = new Vue(
     },
     methods: {
       searchMovie: function() {
+        if (this.search.trim() == ' ' && this.title == '' || this.search.trim() == '' && this.title == '') {
+          return
+        }
         if (this.isSearch == true) {
           this.resultsArr = [];
           this.genre = 'all';
           this.isSearch = false;
         }
         this.result = false;
+        if (this.title == '') {
+          this.title = this.search;
+        }
         let promiseMovie = axios.get('https://api.themoviedb.org/3/search/movie?',{
           params: {
             api_key: '71648f6532d78651db76cf10430d87ef',
             // language: "it_IT",
             page: this.pageMovieCall,
-            query: this.search.trim().toLowerCase()
+            query: this.title.trim().toLowerCase()
           }
         });
         let promiseTV = axios.get('https://api.themoviedb.org/3/search/tv?',{
@@ -45,7 +52,7 @@ var app = new Vue(
             api_key: '71648f6532d78651db76cf10430d87ef',
             // language: "it_IT",
             page: this.pageTvCall,
-            query: this.search.trim().toLowerCase()
+            query: this.title.trim().toLowerCase()
           }
         });
         Promise.all([promiseMovie, promiseTV]).then((values) => {
@@ -60,7 +67,7 @@ var app = new Vue(
           }
           this.resultsArr.push(...newArr);
             // .sort((a,b) => b.popularity - a.popularity));
-          // this.search = '';
+          this.search = '';
         });
       },
 
