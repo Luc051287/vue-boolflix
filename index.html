@@ -24,7 +24,7 @@
             </select>
           </div>
           <div id="search_field">
-            <input id="search_text" type="text" placeholder="Search Movie" v-model="search" @keyup.enter="isSearch = true; pageMovieCall = 1; pageTvCall = 1; searchMovie()">
+            <input id="search_text" type="text" placeholder="Search Movie" v-model="search" @keyup.enter="isSearch = true; title = ''; pageMovieCall = 1; pageTvCall = 1; searchMovie()">
             <button id="search_btn" type="button" name="button" @click="isSearch = true; pageMovieCall = 1; pageTvCall = 1; searchMovie()">SEARCH</button>
           </div>
         </header>

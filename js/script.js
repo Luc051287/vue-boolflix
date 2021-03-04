@@ -39,6 +39,7 @@ var app = new Vue(
         if (this.title == '') {
           this.title = this.search;
         }
+        // this.title = this.search;
         let promiseMovie = axios.get('https://api.themoviedb.org/3/search/movie?',{
           params: {
             api_key: '71648f6532d78651db76cf10430d87ef',
@@ -79,7 +80,7 @@ var app = new Vue(
         }).then(response => {
           result.cast = [];
           for (names of response.data.cast) {
-            result.cast.push(names.name)
+            result.cast.push(names.name);
           }
           this.$forceUpdate();
         })
